@@ -1,0 +1,10 @@
+---
+- name: Copy SSH Key | [dror]
+  become: yes
+  authorized_key:
+    user: "{{ item }}"
+    state: present
+    key: "{{ lookup('file', '/home/dror/.ssh/id_rsa.pub') }}"
+  with_items:
+    - "{{ ssh.users }}"
+...
